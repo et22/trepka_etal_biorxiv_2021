@@ -70,9 +70,9 @@ for data_idx = 1:length(data_names)
     % plot figure 5
     fig_path = strcat("figures/",data_names(data_idx),"/");
     plot_model_fitting_results(output, models, model_colors_rgb, data_idx, 0, data_species_colors_rgb{data_idx});
-    save_close_figures(fig_path + "figure5_model" + models{4}.name);
+    %save_close_figures(fig_path + "figure5_model" + models{4}.name);
     % plot figure s7
     plot_model_parameters_table(models, data_names(data_idx));
-    save_close_figures(fig_path + "figures7_model" + models{4}.name);
+    %save_close_figures(fig_path + "figures7_model" + models{4}.name);
 end
 end

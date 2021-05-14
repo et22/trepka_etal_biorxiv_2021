@@ -32,31 +32,6 @@ models{3}.behav_flag = 0;
 models{3}.color = [0.4    0.4    0.4];
 models{3}.plabels = ["arew", "beta", "aunrew", "clr","cweight"];
 
-% 
-% models{4}.name = 'IncomeChoiceLoss';           % text label to refer to the models
-% models{4}.fun = 'funIncomeChoiceLoss';     % the corresponding .m code for the models
-% models{4}.initpar=[.5 5 .5 .5 0 0];   % initial [alpha_reward beta alpha_noreward]
-% models{4}.lb=[0 0 0 0 -1 -1];            % upper bound of parameters
-% models{4}.ub=[1 100 1 1 1 1];          % lower bound of parameters
-% models{4}.label = "Dyn. RCM";
-% models{4}.behav_flag = 0;
-% % 
-% models{5}.name = 'IncomeChoiceLossV2';           % text label to refer to the models
-% models{5}.fun = 'funIncomeChoiceLossV2';     % the corresponding .m code for the models
-% models{5}.initpar=[.5 5 .5 .5 0 0];   % initial [alpha_reward beta alpha_noreward]
-% models{5}.lb=[0 0 0 0 -1 -1];            % upper bound of parameters
-% models{5}.ub=[1 100 1 1 1 1];          % lower bound of parameters
-% models{5}.label = "Dyn. RCMv2";
-% models{5}.behav_flag = 0;
-% 
-% models{6}.name = 'IncomeChoiceLossV3';           % text label to refer to the models
-% models{6}.fun = 'funIncomeChoiceLossV3';     % the corresponding .m code for the models
-% models{6}.initpar=[.5 5 .5 .5 0 0];   % initial [alpha_reward beta alpha_noreward]
-% models{6}.lb=[0 0 0 0 -1 -1];            % upper bound of parameters
-% models{6}.ub=[1 100 1 1 1 1];          % lower bound of parameters
-% models{6}.label = "Dyn. RCMv3";
-% models{6}.behav_flag = 0;
-
 l = length(models);
 models{l+1}.name = 'IncomeChoiceMemoryBoth';           % text label to refer to the models
 models{l+1}.fun = 'funIncomeChoiceMemoryBoth';     % the corresponding .m code for the models
@@ -80,51 +55,6 @@ models{l+1}.behav_flag = 0;
 models{l+1}.color = [0.6    0.6    0.6];
 models{l+1}.plabels = ["arew", "beta", "aunrew", "decay", "cweight"];
 
-% l = length(models);
-% models{l+1}.name = 'IncomeRewardMemoryBoth';           % text label to refer to the models
-% models{l+1}.fun = 'funIncomeRewardMemoryBoth';     % the corresponding .m code for the models
-% models{l+1}.initpar=[.5 5 .5 .5 0];   % initial [alpha_reward beta alpha_noreward]
-% models{l+1}.lb=[0 0 0 0 -1];            % upper bound of parameters
-% models{l+1}.ub=[1 100 1 1 1];          % lower bound of parameters
-% models{l+1}.label = "RL2+RM";
-% models{l+1}.behav_flag = 0;
-% 
-% l = length(models);
-% models{l+1}.name = 'IncomeRewardMemory';           % text label to refer to the models
-% models{l+1}.fun = 'funIncomeRewardMemory';     % the corresponding .m code for the models
-% models{l+1}.initpar=[.5 5 .5 .5 0];   % initial [alpha_reward beta alpha_noreward]
-% models{l+1}.lb=[0 0 0 0 0];            % upper bound of parameters
-% models{l+1}.ub=[1 100 1 1 1];          % lower bound of parameters
-% models{l+1}.label = "RL2+RM+";
-% models{l+1}.behav_flag = 0;
-% 
-% l = length(models);
-% models{l+1}.name = 'IncomeRewardMemoryV2';           % text label to refer to the models
-% models{l+1}.fun = 'funIncomeRewardMemoryV2';     % the corresponding .m code for the models
-% models{l+1}.initpar=[.5 5 .5 .5 0];   % initial [alpha_reward beta alpha_noreward]
-% models{l+1}.lb=[0 0 0 0 -1];            % upper bound of parameters
-% models{l+1}.ub=[1 100 1 1 1];          % lower bound of parameters
-% models{l+1}.label = "RL2+RMv2";
-% models{l+1}.behav_flag = 0;
-% 
-% l = length(models);
-% models{l+1}.name = 'IncomeRewardMemoryV3';           % text label to refer to the models
-% models{l+1}.fun = 'funIncomeRewardMemoryV3';     % the corresponding .m code for the models
-% models{l+1}.initpar=[.5 5 .5 .5 0];   % initial [alpha_reward beta alpha_noreward]
-% models{l+1}.lb=[0 0 0 0 -1];            % upper bound of parameters
-% models{l+1}.ub=[1 100 1 1 1];          % lower bound of parameters
-% models{l+1}.label = "RL2+RMv3";
-% models{l+1}.behav_flag = 0;
-
-% l = length(models);
-% models{l+1}.name = 'IncomeLossMemory';           % text label to refer to the models
-% models{l+1}.fun = 'funIncomeLossMemory';     % the corresponding .m code for the models
-% models{l+1}.initpar=[.5 5 .5 .5 0];   % initial [alpha_reward beta alpha_noreward]
-% models{l+1}.lb=[0 0 0 0 -1];            % upper bound of parameters
-% models{l+1}.ub=[1 100 1 1 1];          % lower bound of parameters
-% models{l+1}.label = "RL2+LM";
-% models{l+1}.behav_flag = 0;
-
 l = length(models);
 models{l+1}.name = 'IncomeLossMemoryV2';           % text label to refer to the models
 models{l+1}.fun = 'funIncomeLossMemoryV2';     % the corresponding .m code for the models
@@ -147,35 +77,6 @@ models{l+1}.behav_flag = 0;
 models{l+1}.color = [0.8    0.8    0.8];
 models{l+1}.plabels = ["arew", "beta", "aunrew", "decay", "lweight"];
 
-% 
-% 
-% l = length(models);
-% models{l+1}.name = 'IncomeLossMemoryV3';           % text label to refer to the models
-% models{l+1}.fun = 'funIncomeLossMemoryV3';     % the corresponding .m code for the models
-% models{l+1}.initpar=[.5 5 .5 .5 0];   % initial [alpha_reward beta alpha_noreward]
-% models{l+1}.lb=[0 0 0 0 -1];            % upper bound of parameters
-% models{l+1}.ub=[1 100 1 1 1];          % lower bound of parameters
-% models{l+1}.label = "RL2+LMv3";
-% models{l+1}.behav_flag = 0;
-% 
-% l = length(models);
-% models{l+1}.name = 'IncomeChoiceRewardMemoryV4';           % text label to refer to the models
-% models{l+1}.fun = 'funIncomeChoiceRewardMemoryV4';     % the corresponding .m code for the models
-% models{l+1}.initpar=[.5 5 .5 .5 0 0];   % initial [alpha_reward beta alpha_noreward]
-% models{l+1}.lb=[0 0 0 0 -1 -1];            % upper bound of parameters
-% models{l+1}.ub=[1 100 1 1 1 1];          % lower bound of parameters
-% models{l+1}.label = "Dyn. LCM1";
-% models{l+1}.behav_flag = 0;
-
-% l = length(models);
-% models{l+1}.name = 'IncomeChoiceRewardMemoryV5';           % text label to refer to the models
-% models{l+1}.fun = 'funIncomeChoiceRewardMemoryV5';     % the corresponding .m code for the models
-% models{l+1}.initpar=[.5 5 .5 .5 0 0];   % initial [alpha_reward beta alpha_noreward]
-% models{l+1}.lb=[0 0 0 0 -1 -1];            % upper bound of parameters
-% models{l+1}.ub=[1 100 1 1 1 1];          % lower bound of parameters
-% models{l+1}.label = "Dyn. LCMv2";
-% models{l+1}.behav_flag = 0;
-
 l = length(models);
 models{l+1}.name = 'IncomeChoiceRewardMemoryV6';           % text label to refer to the models
 models{l+1}.fun = 'funIncomeChoiceRewardMemoryV6';     % the corresponding .m code for the models
@@ -187,8 +88,16 @@ models{l+1}.behav_flag = 0;
 models{l+1}.color = [0.9492    0.4453    0.3711];
 models{l+1}.plabels = ["arew", "beta", "aunrew", "decay", "cweight","lweight"];
 
-
-%models(2:end) = [];
+l = length(models);
+models{l+1}.name = 'IigayaExact';           % text label to refer to the models
+models{l+1}.fun = 'funIigayaExact';     % the corresponding .m code for the models
+models{l+1}.initpar=[.5 .5 .5];   % initial [f1weight, f2weight, sweight]
+models{l+1}.lb=[0 0 0];            % upper bound of parameters
+models{l+1}.ub=[1 1 1];          % lower bound of parameters
+models{l+1}.label = "Timescales";
+models{l+1}.behav_flag = 0;
+models{l+1}.color = [0.7    0.2    0.1];
+models{l+1}.plabels = ["fast1weight", "fast2weight", "slowweight"];
 
 l = length(models);
 models{l+1}.name = 'behavior';
@@ -219,7 +128,7 @@ for k=1:length(models)
         output.(models{k}.name) = model_struct;
         orig_struct = models{k};
         models{k} = output.(models{k}.name).model;
-        models{k}.exists = 1;  
+        models{k}.exists = 1;
         field_names = fieldnames(orig_struct);
         for cnt = 1:length(field_names)
             if ~isfield(models{k}, field_names{cnt})

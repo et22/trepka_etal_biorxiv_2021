@@ -70,7 +70,11 @@ for data_idx = 1:length(data_names)
     
     %plotting
     %figure 1cd - choice averages over time
-    plot_choice_reward_single_session(all_stats{representative_ses_idx(data_idx)},data_species_colors_rgb{data_idx}, data_idx);
+    if data_idx == 1
+        plot_choice_reward_single_session_cohen(all_stats{representative_ses_idx(data_idx)},data_species_colors_rgb{data_idx}, data_idx);
+    else
+        plot_choice_reward_single_session_costa(all_stats, representative_ses_idx(data_idx),data_species_colors_rgb{data_idx}, data_idx);
+    end
     save_close_figures(fig_path + "fig1_choice_reward");
     
     %figure 1ef - average dev. from matching over time

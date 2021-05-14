@@ -11,6 +11,7 @@ erodsw_mean = {};
 erodsw_sem = {};
 aics = [];
 bics = [];
+aic_mean_for_weights = [];
 
 all_stats = behav_struct.model.stats_sim;
 sim_idxes = [];
@@ -38,6 +39,7 @@ for k=1:length(models)
         aic = model_struct.model.aic(:,1);
         aics = [aics, aic];
         aic_mean{k} = nanmean(aic);
+        aic_mean_for_weights(k) = nanmean(aic);
         aic_sem{k} = nansem(aic);
         
         bic = model_struct.model.bic(:,1);
@@ -83,7 +85,9 @@ for k=1:length(models)-1
     [h, p] = ttest(aics(:,k),aics(:,end));
     better_than_Dyn_RCM(k) = p;
 end
-T = table(model_labels', aic_mean', aic_sem',better_than_Dyn_RCM',ll_mean',bic_mean',mrs', erodsw_mean', erodsw_sem',ks_stat_erodsw', ks_stat_matching', 'VariableNames', ["model", "aic", "aicsem", "ttest","ll","bic","mcfaddenr","ERODSw", "ERODSwsem", "DERODSw", "DMatching"]);
+
+aic_weight_array = aic_weights(aic_mean_for_weights);
+T = table(model_labels', aic_mean', aic_sem',better_than_Dyn_RCM',aic_weight_array,ll_mean',bic_mean',mrs', erodsw_mean', erodsw_sem',ks_stat_erodsw', ks_stat_matching', 'VariableNames', ["model", "aic", "aicsem", "ttest","aicweights", "ll","bic","mcfaddenr","ERODSw", "ERODSwsem", "DERODSw", "DMatching"]);
 disp(T);
 
 %convergence figure
