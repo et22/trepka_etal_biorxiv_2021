@@ -1,4 +1,4 @@
-function stats=algo_IigayaExact(stats,xpar)
+function stats=algo_IigayaMod(stats,xpar)
 fast1_weight=xpar(1);
 fast2_weight=xpar(2);
 slow_weight=xpar(3);
@@ -7,9 +7,9 @@ fast1_weight = fast1_weight/weight_sum;
 fast2_weight = fast2_weight/weight_sum;
 slow_weight = slow_weight/weight_sum;
 
-t_fast1 = 2;
-t_fast2 = 20;
-t_slow = 100;
+t_fast1 = 1/xpar(4);
+t_fast2 = 1/xpar(5);
+t_slow = 1/xpar(6);
 
 t = stats.currTrial;
 if t == 1  %if this is the first trial

@@ -17,7 +17,7 @@ all_stats = behav_struct.model.stats_sim;
 sim_idxes = [];
 models_ptable = zeros(length(models)-1,6);
 plabels = ["arew", "beta", "aunrew", "decay", "cweight","lweight"];
-plabels_label = ["\alpha_{rew}", "\beta", "\alpha_{unrew}", "decay rate", "\omega_{choice}", "\omega_{reward}"];
+plabels_label = ["\alpha_{rew}", "\beta", "\alpha_{unrew}", "decay rate", "\omega_{CM}", "\omega_{LM}"];
 pbounds = [0,1;0,100;0,1;0,1;-1,1;-1,1];
 ses_lengths = nan(length(all_stats),1);
 for sescnt = 1:length(all_stats)
@@ -91,33 +91,33 @@ T = table(model_labels', aic_mean', aic_sem',better_than_Dyn_RCM',aic_weight_arr
 disp(T);
 
 %convergence figure
-figure;
-hold on;
-labels = [];
-for k=[2,8]
-    plot(models{k}.erodsw_comp, 'LineWidth', 2, 'Color', models{k}.color); % matching convergence
-    labels = [labels; models{k}.label];
-    set_axis_defaults();
-end
-ylabel("D_{ERODS_{W-}}");
-xlabel("Number of simulations");
-legend(labels, 'box', 'off');
-yy = ylim;
-ylim([yy(1)-.01; yy(2) + .01]);
+% figure;
+% hold on;
+% labels = [];
+% for k=[2,8]
+%     plot(models{k}.erodsw_comp, 'LineWidth', 2, 'Color', models{k}.color); % matching convergence
+%     labels = [labels; models{k}.label];
+%     set_axis_defaults();
+% end
+% ylabel("D_{ERODS_{W-}}");
+% xlabel("Number of simulations");
+% legend(labels, 'box', 'off');
+% yy = ylim;
+% ylim([yy(1)-.01; yy(2) + .01]);
 
-figure;
-hold on;
-labels = [];
-for k=[2,8]
-    plot(models{k}.matching_comp, 'LineWidth', 2, 'Color', models{k}.color); % matching convergence
-    labels = [labels; models{k}.label];
-    set_axis_defaults();
-end
-yy = ylim;
-ylim([yy(1)-.01; yy(2) + .01]);
-ylabel("D_{dev. from match}");
-xlabel("Number of simulations");
-legend(labels, 'box', 'off');
+% figure;
+% hold on;
+% labels = [];
+% for k=[2,8]
+%     plot(models{k}.matching_comp, 'LineWidth', 2, 'Color', models{k}.color); % matching convergence
+%     labels = [labels; models{k}.label];
+%     set_axis_defaults();
+% end
+% yy = ylim;
+% ylim([yy(1)-.01; yy(2) + .01]);
+% ylabel("D_{dev. from match}");
+% xlabel("Number of simulations");
+% legend(labels, 'box', 'off');
 
 %parameter distributions
 figure('Position',[521,773,732,913]);

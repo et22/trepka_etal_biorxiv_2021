@@ -1,4 +1,4 @@
-function [negloglike, nlls, pl, pr]=funIigayaExact(xpar,dat)
+function [negloglike, nlls, pl, pr]=funIigayaMod(xpar,dat)
 fast1_weight=xpar(1);
 fast2_weight=xpar(2);
 slow_weight=xpar(3);
@@ -18,9 +18,9 @@ i_right_fast1 = .5;
 i_left_fast1 = .5;
 i_right_fast2 = .5;
 i_left_fast2 = .5;
-t_fast1 = 2;
-t_fast2 = 20;
-t_slow = 100;
+t_fast1 = 1/xpar(4); % orig 2, 20, 100
+t_fast2 = 1/xpar(5);
+t_slow = 1/xpar(6);
 
 pl = zeros(1,nt);
 pr = zeros(1,nt);

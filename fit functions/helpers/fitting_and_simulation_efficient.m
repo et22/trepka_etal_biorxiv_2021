@@ -1,4 +1,4 @@
-function models = fitting_and_simulation(all_stats, models, data_label, num_sim, only_fit)
+function [output, models] = fitting_and_simulation_efficient(all_stats,output, models, data_label, num_sim, only_fit)
 disp("fitting & simulating:");
 ses_num = length(all_stats);
 %iterating over all models
@@ -23,6 +23,7 @@ for k = 1:length(models)
         lls = cell(ses_num,1);
         
         %fitting and simulating
+        all_blockcnt = 0;
         for sescnt = 1:ses_num
             stats = all_stats{sescnt};
             %fit model extracting best fit parameters, make sure it
@@ -49,16 +50,24 @@ for k = 1:length(models)
             for j=1:num_sim
                 if ~only_fit
                     if is_cohen
-                        stats_sim{j,sescnt} = predictAgentSimulationBaited(player, stats);
+                        stats_sim_n = predictAgentSimulationBaited(player, stats);
                     else
-                        stats_sim{j,sescnt} = predictAgentSimulationNotBaited(player, stats);
+                        stats_sim_n = predictAgentSimulationNotBaited(player, stats);
                     end 
-                    stats_sim{j,sescnt}.hr_side = stats.hr_side;
-                    stats_sim{j,sescnt}.block_indices = stats.block_indices;
+                    stats_sim_n.hr_side = stats.hr_side;
+                    stats_sim_n.block_indices = stats.block_indices;
                 else 
-                    stats_sim{j,sescnt} = stats;
+                    stats_sim_n = stats;
                 end
-                
+                stats = stats_sim_n;
+                for blockcnt = 1:numel(stats.block_indices)
+                    all_blockcnt = all_blockcnt + 1;
+                    idxes = stats.block_indices{blockcnt};
+                    output.(models{k}.name) = append_to_fields(output.(models{k}.name),...
+                        {behavioral_metrics(stats.c(idxes), stats.r(idxes), stats.hr_side(idxes)),...
+                        entropy_metrics_efficient(stats.c(idxes), stats.r(idxes), stats.hr_side(idxes))});
+                    output.(models{k}.name).session_and_block_and_sim{all_blockcnt} = {[sescnt, blockcnt,j]};
+                end
             end
         end
         models{k}.fitpar = fitpar;

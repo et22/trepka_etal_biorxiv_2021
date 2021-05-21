@@ -71,27 +71,27 @@ for data_idx = 1:length(data_names)
     %plotting
     %figure 1cd - choice averages over time
     if data_idx == 1
-        plot_choice_reward_single_session_cohen(all_stats{representative_ses_idx(data_idx)},data_species_colors_rgb{data_idx}, data_idx);
+        %plot_choice_reward_single_session_cohen(all_stats{representative_ses_idx(data_idx)},data_species_colors_rgb{data_idx}, data_idx);
     else
-        plot_choice_reward_single_session_costa(all_stats, representative_ses_idx(data_idx),data_species_colors_rgb{data_idx}, data_idx);
+        %plot_choice_reward_single_session_costa(all_stats, representative_ses_idx(data_idx),data_species_colors_rgb{data_idx}, data_idx);
     end
-    save_close_figures(fig_path + "fig1_choice_reward");
+    %save_close_figures(fig_path + "fig1_choice_reward");
     
     %figure 1ef - average dev. from matching over time
-    plot_choice_reward_multiple_sessions(all_stats,data_subsets{data_idx},data_subsets_colors{data_idx},data_subsets_labels{data_idx}, data_idx);
-    save_close_figures(fig_path + "fig1_choice_reward");
+    %plot_choice_reward_multiple_sessions(all_stats,data_subsets{data_idx},data_subsets_colors{data_idx},data_subsets_labels{data_idx}, data_idx);
+    %save_close_figures(fig_path + "fig1_choice_reward");
     
     %figure 2 - choice fraction vs reward fraction and deviation from matching
-    plot_deviation_from_matching(output.behavior, data_subsets_colors{data_idx}, data_subsets{data_idx}, data_subsets_labels{data_idx}, data_idx);
-    save_close_figures(fig_path + "fig2_undermatching");
+    %plot_deviation_from_matching(output.behavior, data_subsets_colors{data_idx}, data_subsets{data_idx}, data_subsets_labels{data_idx}, data_idx);
+    %save_close_figures(fig_path + "fig2_undermatching");
     
     %figure 4/S4 - correlation matrices between metrics
-    plot_correlation_matrices(output.behavior, data_subsets{data_idx}, data_species_colors_rgb{data_idx});
-    save_close_figures(fig_path + "fig4_correlations");
+    plot_correlation_matrices(output.behavior, data_subsets{data_idx}, data_species_colors_rgb{data_idx}, data_idx);
+    %save_close_figures(fig_path + "fig4_correlations");
     
     %figure S3 and stepwise - using models to predict deviation from matching
-    plot_stepwise_regressions(output, data_subsets_colors{data_idx}, data_subsets{data_idx}, data_subsets_labels{data_idx});
-    save_close_figures(fig_path + "figS3_pred_undermatching");
+    %plot_stepwise_regressions(output, data_subsets_colors{data_idx}, data_subsets{data_idx}, data_subsets_labels{data_idx});
+    %save_close_figures(fig_path + "figS3_pred_undermatching");
     
     %stop logging terminal output
     diary off;

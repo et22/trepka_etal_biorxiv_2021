@@ -1,7 +1,8 @@
-function [negloglike, nlls, pl, pr]=funIigayaExact(xpar,dat)
+function [negloglike, nlls, pl, pr]=funIigayaBeta(xpar,dat)
 fast1_weight=xpar(1);
 fast2_weight=xpar(2);
 slow_weight=xpar(3);
+beta = xpar(4);
 weight_sum = fast1_weight + fast2_weight + slow_weight;
 fast1_weight = fast1_weight/weight_sum;
 fast2_weight = fast2_weight/weight_sum;
@@ -26,7 +27,7 @@ pl = zeros(1,nt);
 pr = zeros(1,nt);
 nlls = zeros(1,nt);
 for k=1:nt
-    pright=i_right/(i_right+i_left);
+    pright = exp(beta*i_right)/(exp(beta*i_right)+exp(beta*i_left));
     if (isnan(pright))
         pright = .5;
     end

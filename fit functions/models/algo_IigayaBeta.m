@@ -1,7 +1,8 @@
-function stats=algo_IigayaExact(stats,xpar)
+function stats=algo_IigayaBeta(stats,xpar)
 fast1_weight=xpar(1);
 fast2_weight=xpar(2);
 slow_weight=xpar(3);
+beta = xpar(4);
 weight_sum = fast1_weight + fast2_weight + slow_weight;
 fast1_weight = fast1_weight/weight_sum;
 fast2_weight = fast2_weight/weight_sum;
@@ -46,7 +47,7 @@ else
     %% softmax rule for action selection
     stats.i_right = fast1_weight*stats.i_right_fast1 + fast2_weight*stats.i_right_fast2 + slow_weight*stats.i_right_slow;
     stats.i_left = fast1_weight*stats.i_left_fast1 + fast2_weight*stats.i_left_fast2 + slow_weight*stats.i_left_slow;
-    stats.pl(t)= stats.i_left/(stats.i_left + stats.i_right);
+    stats.pl(t)= exp(beta*stats.i_left)/(exp(beta*stats.i_right)+exp(beta*stats.i_left));
     if (isnan(stats.pl(t)))
         stats.pl(t) = .5;
     end
