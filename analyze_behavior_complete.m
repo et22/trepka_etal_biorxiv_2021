@@ -38,6 +38,10 @@ for data_idx = 1:length(data_names)
                 stats.hr_side = all_stats{sescnt}.hr_side(idxes);
                 stats.r = all_stats{sescnt}.r(idxes);
                 stats.c = all_stats{sescnt}.c(idxes);
+                if data_idx == 1
+                    output.behavior.harvesting_efficiency(all_blockcnt) = nansum(all_stats{sescnt}.r(idxes))/...
+                        (nansum(all_stats{sescnt}.bait_l(idxes)) + nansum(all_stats{sescnt}.bait_r(idxes)));
+                end
                 output.behavior = append_to_fields(output.behavior,...
                     {behavioral_metrics(stats.c, stats.r, stats.hr_side),...
                     entropy_metrics_efficient(stats.c, stats.r, stats.hr_side)});
@@ -60,7 +64,7 @@ for data_idx = 1:length(data_names)
             end
         end
         behavior = output.behavior;
-        save(output_file_name, 'behavior');
+        %save(output_file_name, 'behavior');
     else
         behavior = load(output_file_name, 'behavior');
         output = behavior;
@@ -70,7 +74,11 @@ for data_idx = 1:length(data_names)
     
     %plotting
     %figure 1cd - choice averages over time
-    plot_choice_reward_single_session(all_stats{representative_ses_idx(data_idx)},data_species_colors_rgb{data_idx}, data_idx);
+    if data_idx == 1
+        plot_choice_reward_single_session_cohen(all_stats{representative_ses_idx(data_idx)},data_species_colors_rgb{data_idx}, data_idx);
+    else
+        plot_choice_reward_single_session_costa(all_stats, representative_ses_idx(data_idx),data_species_colors_rgb{data_idx}, data_idx);
+    end
     save_close_figures(fig_path + "fig1_choice_reward");
     
     %figure 1ef - average dev. from matching over time
@@ -82,7 +90,7 @@ for data_idx = 1:length(data_names)
     save_close_figures(fig_path + "fig2_undermatching");
     
     %figure 4/S4 - correlation matrices between metrics
-    plot_correlation_matrices(output.behavior, data_subsets{data_idx}, data_species_colors_rgb{data_idx});
+    plot_correlation_matrices(output.behavior, data_subsets{data_idx}, data_species_colors_rgb{data_idx}, data_idx);
     save_close_figures(fig_path + "fig4_correlations");
     
     %figure S3 and stepwise - using models to predict deviation from matching
@@ -93,15 +101,15 @@ for data_idx = 1:length(data_names)
     diary off;
     fclose('all');
 end
-% figure 3 + supplement
+% % figure 3 + supplement
 plot_combined_metric_surfaces(all_output.(data_names(1)), all_output.(data_names(2)), data_species_colors_rgb{1}, data_species_colors_rgb{2});
 save_close_figures(base_fig_path + "combined/fig3_surfaces_combined");
-
-%figure 1 + 2 in supplement
+% 
+% %figure 1 + 2 in supplement
 plot_combined_average_behavioral_metrics(all_output.(data_names(1)), all_output.(data_names(2)),data_subsets{1},data_subsets{2}, data_subsets_labels{1},data_subsets_labels{2},[data_subsets_colors{1},data_subsets_colors{2}]);
 save_close_figures(base_fig_path + "combined/figS1_average_behavioral_metrics_combined");
-
-%figure 1 + 2 in supplement
+% 
+% %figure 1 + 2 in supplement
 plot_combined_average_entropy_metrics(all_output.(data_names(1)), all_output.(data_names(2)),data_subsets{1},data_subsets{2}, data_subsets_labels{1},data_subsets_labels{2},[data_subsets_colors{1},data_subsets_colors{2}]);
 save_close_figures(base_fig_path + "combined/figS2_average_entropy_metrics_combined");
 end

@@ -15,7 +15,7 @@ for ses_cnt = 1:ses_num
     all_stats{ses_cnt}.prob7030 = repmat(sum(ses_data(:,12)==7030)>0,2,1);
     all_stats{ses_cnt}.prob8020 = repmat(sum(ses_data(:,12)==8020)>0,2,1);
     all_stats{ses_cnt}.r = ses_data(:,11);
-    
+    all_stats{ses_cnt}.abs_superblock_idx = ses_data(1,4);
     all_stats{ses_cnt}.c = -(ses_data(:,14)==10)+(ses_data(:,14)==20); %circle (10) -> -1, square(20) -> 1 ses_data(:,9)*2-1; %1 -> 1, 0 -> -1
     all_stats{ses_cnt}.animal_ids = strcat("BB", int2str(ses_data(1,1)));
     all_stats{ses_cnt}.block_indices = {find(ses_data(:,10)==1),find(ses_data(:,10)==2)};

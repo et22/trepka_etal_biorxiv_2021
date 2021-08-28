@@ -1,4 +1,4 @@
-function plot_correlation_matrices(output, subs, species_color)
+function plot_correlation_matrices(output, subs, species_color, data_idx)
 %% Calculate Correlation Matrix
 corr_lbls = {'pwin', 'pstay', 'winstay', 'loseswitch',...
     'delta_winstay_losestay', 'RI', ...
@@ -98,65 +98,81 @@ reward_cat_list = ["finalCorrSt", "finalCorrSt_rewsched1", "finalCorrSt_rewsched
 reward_labels = [strcat(subs(1), "_and_", subs(2)), subs(1), subs(2)];
 corr_type = ["Pearson", "Spearman"];
 corr_type_label = ["parametric", "non-parametric"];
-for i=1:length(reward_cat_list)
-    for j=1:2
-        figname = strcat(corr_type(j),"_",reward_labels(i));
-        figure('Position', [507.85714285,676.4285714,995.857142,943.4285714], 'Name', figname);
-        
-        %% Plot Correlation Matrix
-        tmpMat = o.(reward_cat_list(i)).(corr_type(j)).R(:,:);
-        tmpMat(o.(reward_cat_list(i)).(corr_type(j)).P(:,:)>0.0001) = nan;
-        h = heatmap(matrix_labels, matrix_labels, round(tmpMat,2));
-        set(gca,'FontName','Helvetica','FontSize',12,'CellLabelFormat','%0.2g',...
-            'ColorLimits',[-1 1],'MissingDataLabel','n.s.');
-        set(h.NodeChildren(3), 'XTickLabelRotation', 45, 'YTickLabelRotation', 45, 'FontSize',16);
-        set(h.NodeChildren(2),  'FontSize',25);
-        set(h.NodeChildren(1),  'FontSize',25);
-                h.NodeChildren(3).Title.String = corr_type_label(j);
-        h.NodeChildren(3).Title.FontSize = 25;
-        h.NodeChildren(3).Title.FontWeight = 'normal';
-        set(gcf,'color','w')
-    end
-end
+% for i=1:length(reward_cat_list)
+%     for j=1:2
+%         figname = strcat(corr_type(j),"_",reward_labels(i));
+%         figure('Position', [507.85714285,676.4285714,995.857142,943.4285714], 'Name', figname);
+%         
+%         %% Plot Correlation Matrix
+%         tmpMat = o.(reward_cat_list(i)).(corr_type(j)).R(:,:);
+%         tmpMat(o.(reward_cat_list(i)).(corr_type(j)).P(:,:)>0.0001) = nan;
+%         h = heatmap(matrix_labels, matrix_labels, round(tmpMat,2));
+%         set(gca,'FontName','Helvetica','FontSize',12,'CellLabelFormat','%0.2g',...
+%             'ColorLimits',[-1 1],'MissingDataLabel','n.s.');
+%         set(h.NodeChildren(3), 'XTickLabelRotation', 45, 'YTickLabelRotation', 45, 'FontSize',16);
+%         set(h.NodeChildren(2),  'FontSize',25);
+%         set(h.NodeChildren(1),  'FontSize',25);
+%                 h.NodeChildren(3).Title.String = corr_type_label(j);
+%         h.NodeChildren(3).Title.FontSize = 25;
+%         h.NodeChildren(3).Title.FontWeight = 'normal';
+%         set(gcf,'color','w')
+%     end
+% end
 
 %% plotting correlation bar graph with important metrics - pwin, pstay, win-stay, lose-switch, ERDS, EODS, ERODS, ERODS_loseworse, other ERODSs
 metrics = {'pwin', 'pstay', 'winstay', 'loseswitch',...
+    'delta_winstay_losestay', 'RI', ...
+    'RI_B','RI_W',...
     'ERDS', 'ERDS_win', 'ERDS_lose','EODS','EODS_better','EODS_worse',...
     'ERODS', 'ERODS_winbetter', 'ERODS_losebetter', 'ERODS_winworse', 'ERODS_loseworse'};
-entropy_metric_start_idx = 5;
-matrix_labels = {"P(win)", "P(stay)", "WinStay", "LoseSwitch", "ERDS", "ERDS(win)", "ERDS(lose)", "EODS", "EODS(better)", "EODS(worse)","ERODS",...
+entropy_metric_start_idx = 9;
+matrix_labels = {"P(win)", "P(stay)", "WinStay", "LoseSwitch","WinStay-LoseStay", "RI", "RI(better)",...
+    "RI(worse)", "ERDS", "ERDS(win)", "ERDS(lose)", "EODS", "EODS(better)", "EODS(worse)","ERODS",...
    "ERODS(win,better)", "ERODS(lose,better)" , "ERODS(win,worse)", "ERODS(lose,worse)"};
-xticks = ones(length(metrics),1);
+yticks = ones(length(metrics),1);
 for j=1:2
     figure;
 for i = 1:length(metrics)
     if i>=entropy_metric_start_idx
-        face_color = species_color;
-        edge_color = [1 1 1];
+        if i==length(metrics)
+            face_color = species_color;
+            edge_color = [1 1 1];
+        else
+            face_color = species_color;
+            edge_color = [1 1 1];
+        end
         x_idx = i+1;
     else
-        face_color = [1 1 1];
-        edge_color = species_color;
+        if i==data_idx
+            face_color = species_color;
+            edge_color = [1 1 1];
+        else
+            face_color = species_color;
+            edge_color = [1 1 1];
+        end
         x_idx = i;
     end
-    xticks(i) = x_idx;
+    yticks(i) = x_idx;
     
     if(matching_corr.(corr_type(j)).P.(metrics{i})<.0001)
-        bar(x_idx, matching_corr.(corr_type(j)).R.(metrics{i}),'FaceColor',face_color,'EdgeColor',edge_color, 'LineWidth', 2);
+        barh(x_idx, matching_corr.(corr_type(j)).R.(metrics{i}),'FaceColor',face_color,'EdgeColor',edge_color, 'LineWidth', 1);
     else
-        plot(x_idx, 0, 'X', 'MarkerEdgeColor', 'k', 'MarkerFaceColor', 'k', 'MarkerSize', 12, 'LineWidth', .5);
+        face_color = [1 1 1];%species_color;
+        edge_color = species_color;
+        barh(x_idx, matching_corr.(corr_type(j)).R.(metrics{i}),'FaceColor',face_color,'EdgeColor',edge_color, 'LineWidth', 1);
     end
-    yline(0, 'LineWidth', 1, 'Color', 'k');
+    xline(0, 'LineWidth', 1, 'Color', 'k');
     hold on;
 end
 
 set(gca,'FontName','Helvetica','FontSize',10,'FontWeight','normal',...
-    'LineWidth',1, 'YTick', -1:.25:1);
-set(gca, 'XTick', xticks, 'XTickLabels', matrix_labels);
+    'LineWidth',1, 'XTick', -1:.25:1);
+set(gca, 'YTick', yticks, 'YTickLabels', matrix_labels);
 set(gca, 'tickdir', 'out');
 xtickangle(45);
-ylim([-1 1]);
-ylabel("Corr. with dev. from matching");% ("+(corr_type(j))+" R)");
+xlim([-1 1]);
+xlabel("Corr. with dev. from matching");% ("+(corr_type(j))+" R)");
+set(gcf, 'position', [  360.0000  156.3333  398.3333  461.6667]);
 box off;
 %% plotting correlation of best behavioral and best entropy
 

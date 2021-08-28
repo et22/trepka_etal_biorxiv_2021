@@ -1,4 +1,4 @@
-function models = fitting_and_simulation(all_stats, models, data_label, num_sim, only_sim_flag)
+function models = fitting_and_simulation(all_stats, models, data_label, num_sim, only_fit)
 disp("fitting & simulating:");
 ses_num = length(all_stats);
 %iterating over all models
@@ -47,7 +47,7 @@ for k = 1:length(models)
                 is_cohen = false;
             end
             for j=1:num_sim
-                if ~only_sim_flag
+                if ~only_fit
                     if is_cohen
                         stats_sim{j,sescnt} = predictAgentSimulationBaited(player, stats);
                     else
@@ -58,6 +58,7 @@ for k = 1:length(models)
                 else 
                     stats_sim{j,sescnt} = stats;
                 end
+                
             end
         end
         models{k}.fitpar = fitpar;
