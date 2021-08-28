@@ -11,7 +11,7 @@ for data_idx = 1:length(data_names)
     [output, models] = initialize_models(data_names(data_idx));
     all_stats = subset_sessions_rew_probs(all_stats, data_subsets{data_idx});
     %models = fitting_and_simulation(all_stats,models,data_names(data_idx), sim_num, only_fit); %initialize models, fit and simulate
-    [output, models] = fitting_and_simulation_efficient(all_stats,output,models,data_names(data_idx), sim_num, only_fit); %initialize models, fit and simulate
+    %[output, models] = fitting_and_simulation_efficient(all_stats,output,models,data_names(data_idx), sim_num, only_fit); %initialize models, fit and simulate
     
     if ~only_fit
         %% running average computations and average computations
@@ -85,11 +85,11 @@ for data_idx = 1:length(data_names)
         0.20   0.84  0.92;
         0.20   0.64  0.92;];
     % plot figure 5
-    %fig_path = strcat("figures/",data_names(data_idx),"/");
+    fig_path = strcat("figures/",data_names(data_idx),"/");
     plot_model_fitting_results(output, models, model_colors_rgb, data_idx, 0, data_species_colors_rgb{data_idx});
-    %save_close_figures(fig_path + "figure5_model" + models{4}.name);
+    save_close_figures(fig_path + "figure5_model" + models{4}.name);
     % plot figure s7
-    %plot_model_parameters_table(models, data_names(data_idx));
-    %save_close_figures(fig_path + "figures7_model" + models{4}.name);
+    plot_model_parameters_table(models, data_names(data_idx), data_idx);
+    save_close_figures(fig_path + "figures7_model" + models{4}.name);
 end
 end

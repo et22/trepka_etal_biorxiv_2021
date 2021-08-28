@@ -138,17 +138,17 @@ for i = 1:length(metrics)
             face_color = species_color;
             edge_color = [1 1 1];
         else
-            face_color = 'k';%species_color;
+            face_color = species_color;
             edge_color = [1 1 1];
         end
         x_idx = i+1;
     else
         if i==data_idx
-            face_color = [1 1 1];
-            edge_color = species_color;
+            face_color = species_color;
+            edge_color = [1 1 1];
         else
-        face_color = [1 1 1];
-        edge_color = 'k';%species_color;
+            face_color = species_color;
+            edge_color = [1 1 1];
         end
         x_idx = i;
     end
@@ -157,7 +157,9 @@ for i = 1:length(metrics)
     if(matching_corr.(corr_type(j)).P.(metrics{i})<.0001)
         barh(x_idx, matching_corr.(corr_type(j)).R.(metrics{i}),'FaceColor',face_color,'EdgeColor',edge_color, 'LineWidth', 1);
     else
-        plot(0, x_idx, 'X', 'MarkerEdgeColor', 'k', 'MarkerFaceColor', 'k', 'MarkerSize', 12, 'LineWidth', .5);
+        face_color = [1 1 1];%species_color;
+        edge_color = species_color;
+        barh(x_idx, matching_corr.(corr_type(j)).R.(metrics{i}),'FaceColor',face_color,'EdgeColor',edge_color, 'LineWidth', 1);
     end
     xline(0, 'LineWidth', 1, 'Color', 'k');
     hold on;

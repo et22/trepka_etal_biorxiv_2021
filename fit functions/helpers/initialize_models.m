@@ -2,6 +2,16 @@ function [output, models] = initialize_models(dataset_name, load_output)
 if ~exist("load_output",'var')
     load_output = true;
 end
+% models{1}.name = 'IncomeTimescales';         % text label to refer to the models
+% models{1}.fun = 'funIncomeTimescales';       % the corresponding .m code for the models
+% models{1}.initpar=[.5 5 .5 .5 .05 .05 .05 .5];   % initial [alpha_reward beta alpha_noreward]
+% models{1}.lb=[0 0 0 0 0 0 0 0];            % upper bound of parameters
+% models{1}.ub=[1 100 1 1 1 1 1 1];          % lower bound of parameters
+% models{1}.label = "RL2+Timescales";
+% models{1}.behav_flag = 0;
+% models{1}.color = [0.3    0.3    0.3];
+% models{1}.plabels = ["arew_fast", "beta", "aunrew_fast", "decay_fast", "arew_slow", "aunrew_slow", "decay_slow", "slow_weight"];
+
 models{1}.name = 'Return';       % text label to refer to the models
 models{1}.fun = 'funReturn';     % the corresponding .m code for the models
 models{1}.initpar=[0.5 5 0.5];   % initial [alpha_reward beta alpha_noreward]
@@ -164,6 +174,27 @@ models{l+1}.label = "Timescales";
 models{l+1}.behav_flag = 0;
 models{l+1}.color = [0.7    0.2    0.1];
 models{l+1}.plabels = ["fast1weight", "fast2weight", "slowweight"];
+% l = length(models);
+% models{l+1}.name = 'IncomeTimescales';         % text label to refer to the models
+% models{l+1}.fun = 'funIncomeTimescales';       % the corresponding .m code for the models
+% models{l+1}.initpar=[.5 5 .5 .5 .05 .05 .05 .5];   % initial [alpha_reward beta alpha_noreward]
+% models{l+1}.lb=[0 0 0 0 0 0 0 0];            % upper bound of parameters
+% models{l+1}.ub=[1 100 1 1 1 1 1 1];          % lower bound of parameters
+% models{l+1}.label = "RL2+Timescales";
+% models{l+1}.behav_flag = 0;
+% models{l+1}.color = [0.7    0.2    0.1];
+% models{l+1}.plabels = ["arew_fast", "beta", "aunrew_fast", "decay_fast", "arew_slow", "aunrew_slow", "decay_slow", "slow_weight"];
+% l = length(models);
+% models{l+1}.name = 'IncomeTimescalesSimple';         % text label to refer to the models
+% models{l+1}.fun = 'funIncomeTimescalesSimple';       % the corresponding .m code for the models
+% models{l+1}.initpar=[.5 5 .5 .5 .1 .5];   % initial [alpha_reward beta alpha_noreward]
+% models{l+1}.lb=[0 0 0 0 0 0];            % upper bound of parameters
+% models{l+1}.ub=[1 100 1 1 1 1];          % lower bound of parameters
+% models{l+1}.label = "RL2+TimescalesSimple";
+% models{l+1}.behav_flag = 0;
+% models{l+1}.color = [0.7    0.2    0.1];
+% models{l+1}.plabels = ["arew_fast", "beta", "aunrew_fast", "decay_fast", "slow_ts","slow_weight"];
+
 
 % l = length(models);
 % models{l+1}.name = 'IigayaBeta';           % text label to refer to the models

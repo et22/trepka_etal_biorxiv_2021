@@ -120,11 +120,11 @@ for i=1:4
     hold on;
     overlayed_scatter(output1.(bd_labels(i,1)),output1.(bd_labels(i,2)),1.1*ones(size(output1.(bd_labels(i,2)),1), size(output1.(bd_labels(i,2)),2)),...
         output2.(bd_labels(i,1)),output2.(bd_labels(i,2)),1.1*ones(size(output2.(bd_labels(i,2)),1), size(output2.(bd_labels(i,2)),2)),...
-        point_col1, point_col2);
+        point_col1, point_col2, .5);
     
     overlayed_scatter_no_div(output1.(bd_labels(i,1)),output1.(bd_labels(i,2)),ones(size(output1.(bd_labels(i,2)),1), size(output1.(bd_labels(i,2)),2)),...
         output2.(bd_labels(i,1)),output2.(bd_labels(i,2)),ones(size(output2.(bd_labels(i,2)),1), size(output2.(bd_labels(i,2)),2)),...
-        point_col1, point_col2, .8);
+        point_col1, point_col2, .25);
     set(gca, 'XTick', [0:.5:1], 'YTick', [0:.5:1], 'ZTick', [0:.5:1]);
     set(gca,'FontName','Helvetica','FontSize',16);
     set(gca,'LineWidth',2);
@@ -164,10 +164,10 @@ for i=5:6
     
     overlayed_scatter_no_div(output1.(bd_labels(i,1)),output1.(bd_labels(i,2)),ones(size(output1.(bd_labels(i,2)),1), size(output1.(bd_labels(i,2)),2)),...
         output2.(bd_labels(i,1)),output2.(bd_labels(i,2)),ones(size(output2.(bd_labels(i,2)),1), size(output2.(bd_labels(i,2)),2)),...
-        point_col1, point_col2, .8);
+        point_col1, point_col2, .25);
     overlayed_scatter_no_div(output2.(bd_labels(i,1)),output2.(bd_labels(i,2)),1.2*ones(size(output2.(bd_labels(i,2)),1), size(output2.(bd_labels(i,2)),2)),...
         output2.(bd_labels(i,1)),output2.(bd_labels(i,2)),1.2*ones(size(output2.(bd_labels(i,2)),1), size(output2.(bd_labels(i,2)),2)),...
-        point_col2, point_col2, .5);
+        point_col2, point_col2, .35);
     set(gca, 'XTick', [0:.5:1], 'YTick', [0:.5:1], 'ZTick', [0:.5:1]);
     set(gca,'FontName','Helvetica','FontSize',16);
     set(gca,'LineWidth',2)

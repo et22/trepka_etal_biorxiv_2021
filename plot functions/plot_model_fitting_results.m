@@ -8,6 +8,7 @@ model_colors=[0.2    0.2    0.2;
     ];
 if data_idx == 1
     new_models{1} = models{15};
+    new_models{1}.label = "Mult. Timescales";
     new_models{2} = models{1};
     new_models{3} = models{2};
     new_models{4} = models{5};
@@ -20,6 +21,7 @@ if data_idx == 1
     plot_metric_distributions_new_one(output, new_models, model_colors, data_idx, only_fit, behavior_color)
 else
     new_models{1} = models{15};
+    new_models{1}.label = "Mult. Timescales";
     new_models{2} = models{1};
     new_models{3} = models{2};
     new_models{4} = models{4};
@@ -94,14 +96,14 @@ if ~only_fit
         text_string_inc = strcat("$\mathbf{D_{RL2} = ", sprintf('%.3f',dstat), "}$");
         text_string_mod = strcat("$", "\mathbf{D_{RL2+CM+LM} = ", sprintf('%.3f',dstat2), "}$");
         p_text_string_inc=strcat("$\mathbf{p_{RL2}=",inc_p_text,"}$");
-        p_text_string_mod=strcat("$\mathbf{p_{RL2+CM}=",mod_p_text,"}$");
+        p_text_string_mod=strcat("$\mathbf{p_{RL2+CM+LM}=",mod_p_text,"}$");
         ax = gca;
         if i-1==1
-            text(.03,.94, text_string_inc,'Interpreter', 'latex', 'FontSize', 11);
-            text(.03,1, p_text_string_inc, 'Interpreter', 'latex', 'FontSize', 11);
+            text(.03,1, text_string_inc,'Interpreter', 'latex', 'FontSize', 11);
+            text(.03,.94, p_text_string_inc, 'Interpreter', 'latex', 'FontSize', 11);
 
-            text(.37, .54, text_string_mod,'Interpreter', 'latex', 'FontSize', 11);
-            text(.37,.6, p_text_string_mod, 'Interpreter', 'latex', 'FontSize', 11);
+            text(.37, .6, text_string_mod,'Interpreter', 'latex', 'FontSize', 11);
+            text(.37,.54, p_text_string_mod, 'Interpreter', 'latex', 'FontSize', 11);
 
             ax1 = axes('Position',[ax_pos(1) + ax_pos(3)*.07, ax_pos(2)+.5*ax_pos(4), ax_pos(3)/5, ax_pos(4)/2.5], 'units', 'normalized');
             plot_side_by_side_histograms(o.X1, o.X2, colors(1:2,:),[0, .6]);
@@ -127,11 +129,12 @@ if ~only_fit
             f = figure('Position',[0,0,553,186]);% subplot(3, 3,[(i-1)*3+1, (i-1)*3+3]);
             plot_bar_plot(o.X1,o.X3,o.X2,[colors(1,:);colors(3,:);colors(2,:)],[my_legend(1), my_legend(3), my_legend(2)], [.2 .25]);
         end
+        
     end
-    
-    disp("KS test for UM Income vs Behave: k=" +ks2statIncome);
+       disp("KS test for UM Income vs Behave: k=" +ks2statIncome);
     disp("KS test for UM " + models{end-1}.label + " vs Behave: k=" +ks2statMod4);
-end
+
+ end
 
 end
 function     plot_metric_distributions_new_two(output, models, model_colors, data_idx, only_fit, behavior_color)
